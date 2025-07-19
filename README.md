@@ -96,7 +96,8 @@ export AWS_SECRET_ACCESS_KEY="your-minio-password"
 ```
 
 ```bash
-echo $AWS_SECRET_ACCESS_KEY # check that values are fetched before running `vagrant up` or `terraform init`
+# check that values are fetched before running `vagrant up` or `terraform init`
+echo $AWS_SECRET_ACCESS_KEY 
 ```
 > ⚠️ Be sure your real .env is listed in .gitignore to keep secrets safe!
 

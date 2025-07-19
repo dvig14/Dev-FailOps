@@ -2,7 +2,7 @@
 
 This guide sets up **MinIO** on a Linux VM using `systemd` to ensure the server runs reliably and automatically on reboot.
 
----
+<br>
 
 ## 📦 Step 1: Install `wget`
 
@@ -13,7 +13,7 @@ sudo apt-get update -y
 sudo apt-get install -y wget
 ```
 
----
+<br>
 
 ## 📥 Step 2: Download and Install MinIO Binary
 
@@ -29,7 +29,7 @@ sudo mv minio /usr/local/bin/
 > * The process doesn't hang.
 > * It starts automatically on VM reboot.
 
----
+<br>
 
 ## 📁 Step 3: Create Directory for File Storage
 
@@ -40,7 +40,7 @@ sudo mkdir -p /home/vagrant/minio
 sudo chown vagrant:vagrant /home/vagrant/minio
 ```
 
----
+<br>
 
 ## 🔐 Step 4: Set Environment Variables from `.env`
 
@@ -55,7 +55,7 @@ export AWS_SECRET_ACCESS_KEY=your-password
 
 > ⚠️ **Important:** Add `.env` to your `.gitignore` file to avoid pushing secrets to version control.
 
----
+<br>
 
 ## ⚙️ Step 5: Create systemd Service for MinIO
 
@@ -82,7 +82,7 @@ WantedBy=multi-user.target      # Enables service to start automatically at boot
 EOF
 ```
 
----
+<br>
 
 ## ▶️ Step 6: Enable and Start MinIO
 
@@ -94,7 +94,7 @@ sudo systemctl enable minio
 sudo systemctl start minio
 ```
 
----
+<br>
 
 ## ✅ Output
 
@@ -103,7 +103,7 @@ MinIO server started. Access it at http://192.168.56.22:9000
 MinIO Console is available at http://192.168.56.22:9001
 ```
 
----
+<br>
 
 ## 🧠 Notes
 

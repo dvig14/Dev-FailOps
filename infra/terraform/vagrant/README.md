@@ -224,11 +224,12 @@ variable "vm_name" {
 
 | Scenario                        | Command                                                             |
 | ------------------------------- | ------------------------------------------------------------------- |
-| Bring all VMs up (default)      | `terraform apply -var="jenkins_enable=true" -var="app_enable=true"` |
+| Enable vms you want to run      | `terraform apply -var="jenkins_enable=true" -var="app_enable=true"` |
+| Bring all vms up i.e enaled     | `terraform apply`                                                   |
 | Halt all VMs that are enabled   | `terraform apply -var="vm_state=halt"`                              |
 | Halt specific VM (`app`)        | `terraform apply -var="vm_state=halt" -var="vm_name=app"`           |
 | Bring up specific VM (`app`)    | `terraform apply -var="vm_state=up" -var="vm_name=app"`             |
-| Destroy all VMs + resources     | `terraform destroy`                                                 |                
+| Destroy all VMs + resources     | `terraform destroy`                                                 |    
 
 <br>
 

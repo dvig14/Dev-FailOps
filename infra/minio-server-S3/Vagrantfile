@@ -1,0 +1,16 @@
+Vagrant.configure("2") do |config|
+    config.vm.define "minio-server" do |minio|
+      minio.vm.box = "ubuntu/jammy64" 
+      minio.vm.hostname = "minio-server" 
+      minio.vm.network "private_network", ip: "192.168.56.22"  
+      minio.vm.provider "virtualbox" do |vb|
+        vb.memory = 512
+        vb.cpus = 1 
+        vb.gui = false
+      end
+      minio.vm.provision "shell" , path: "setup-minio.sh" , env: {
+        "MINIO_USER" => ENV['AWS_ACCESS_KEY_ID'],
+        "MINIO_PASS" => ENV['AWS_SECRET_ACCESS_KEY']
+     }
+    end 
+end

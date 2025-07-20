@@ -25,7 +25,7 @@ Terraform state is a file that **keeps track of the infrastructure** created by 
 
 <br>
 
-## ☁️ Why Use a Remote Backend Like MinIO?
+## ☁️ Why Use a Remote Backend Like MiniO?
 
 In real-world scenarios:
 

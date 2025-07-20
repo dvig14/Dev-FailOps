@@ -10,7 +10,7 @@ Once you've restored the correct version of the `terraform.tfstate` file from Mi
 terraform plan
 ```
 
-![After Restoring](./assets/after_restoring_plan.png)
+[After Restoring](./assets/after_restoring_plan.png)
 
 <br>
 
@@ -30,7 +30,7 @@ terraform plan
 terraform apply
 ```
 
-![No new resource created](./assets/no_changes.png)
+[No new resource created](./assets/no_changes.png)
 
 <br>
 
@@ -61,11 +61,8 @@ After importing, let's verify that Terraform tracks the resource and doesn't rec
 terraform plan
 ```
 
-* **Plan Output**:
-  ![Plan Output](./assets/verify_import.png)
-
-* **Imported Resource ID**:
-  ![Resource you imported](./assets/import_id.png)
+- [Plan Output](./assets/verify_import.png)
+- [Resource you imported](./assets/import_id.png)
 
 <br>
 
@@ -119,8 +116,8 @@ What happens?
 I don't see any config for aws_instance.my_vm, so I'll delete it!
 ```
 
-🔄 Result:
-✅ Terraform updates the state to include that EC2 instance.
+- 🔄 Result:
+- ✅ Terraform updates the state to include that EC2 instance.
 
 <br>
 

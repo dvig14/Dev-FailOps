@@ -25,10 +25,10 @@ That means:
 
 ### 🛠 Fixing Our Lab
 
-> ✅ Prerequisite: Your backend is set to use MinIO with versioning **enabled**.
-> [Minio setup](../../../../infra/minio-server-S3/README.md)
-> 📁 Bucket name: `terra-state`
-> 📁 Path inside bucket: `terra-scenarios/01_tfstate-deletion/terraform.tfstate`
+- ✅ Prerequisite: Your backend is set to use MinIO with versioning **enabled**.
+- [Minio setup](../../../../infra/minio-server-S3/README.md)
+- 📁 Bucket name: `terra-state`
+- 📁 Path inside bucket: `terra-scenarios/01_tfstate-deletion/terraform.tfstate`
 
 <br>
 
@@ -44,9 +44,9 @@ That means:
 
 * Click the file name (`terraform.tfstate`)
 * Select the **"Display Object Versions"** tab
-  ![Display Object Versions](./assets/minio.png)
+  - [Display Object Versions](./assets/minio.png)
 * You'll see a list of past versions:
-  ![All state versions](./assets/versions.png)
+  - [All state versions](./assets/versions.png)
 
 > ℹ️ The latest version (at the top) is empty state created after `terraform destroy`.
 
@@ -59,7 +59,7 @@ terraform plan
 ```
 
 * Output will show **Terraform wants to create all resources again**, because it **thinks nothing exists**.
-  ![Before restoring](./assets/plan_before_fix.png)
+- [Before restoring](./assets/plan_before_fix.png)
 
 <br>
 
@@ -70,10 +70,7 @@ terraform plan
 * MinIO creates a new version — now the **current version** is the correct one.
   ✅ You're restored!
 
-<br>
-
-### 🔍 Verify
-[Verify](./verify.md#-verify-path-1-restore-backup-from-minio-versioning)  
+### [🔍 Verify](./verify.md#-verify-path-1-restore-backup-from-minio-versioning)  
 
 <br>
 
@@ -102,6 +99,6 @@ You're in trouble.
 * Apply will **recreate** everything.
 * Real servers or data could be **duplicated** or **overwritten**.
 
-That's when we switch to [👉 Fix Path 2: `terraform import`](./fix-path-2.md)
+That's when we switch to [👉 Fix Path 2: terraform import](./fix-path-2.md)
 
 > Before starting that, delete the current version state file. 

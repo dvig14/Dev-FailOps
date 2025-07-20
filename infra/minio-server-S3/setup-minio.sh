@@ -23,6 +23,11 @@ sudo mv minio /usr/local/bin/
 sudo mkdir -p /home/vagrant/minio
 sudo chown vagrant:vagrant /home/vagrant/minio
 
+sudo tee /etc/default/minio > /dev/null <<EOF
+MINIO_ROOT_USER="${MINIO_USER}"
+MINIO_ROOT_PASSWORD="${MINIO_PASS}"
+EOF
+
 cat << EOF | sudo tee /etc/systemd/system/minio.service
 [Unit]
 Description=MinIO
@@ -31,8 +36,7 @@ After=network-online.target
 [Service]
 User=vagrant
 Group=vagrant
-Environment="MINIO_ROOT_USER=${MINIO_USER}"  
-Environment="MINIO_ROOT_PASSWORD=${MINIO_PASS}"
+EnvironmentFile=/etc/default/minio
 ExecStart=/usr/local/bin/minio server /home/vagrant/minio --console-address=:9001
 Restart=always
 LimitNOFILE=65536
@@ -45,5 +49,23 @@ sudo systemctl daemon-reload
 sudo systemctl enable minio
 sudo systemctl start minio
 
-echo "MinIO server started. Access it at http://192.168.56.22:9000"
-echo "MinIO Console is available at http://192.168.56.22:9001" 
+echo "✅ MinIO server started. Access it at http://192.168.56.22:9000"
+echo "✅ MinIO Console is available at http://192.168.56.22:9001" 
+
+echo "⏳ Waiting for MinIO to be live..."
+until curl -s http://localhost:9000/minio/health/live >/dev/null; do
+  sleep 2
+done
+echo "✅ MinIO is live!"
+
+wget https://dl.min.io/client/mc/release/linux-amd64/mc -O mc
+chmod +x mc
+sudo mv mc /usr/local/bin/
+
+mc alias set local http://localhost:9000 "$MINIO_USER" "$MINIO_PASS"
+
+BUCKET_NAME="terra-state"
+mc mb local/$BUCKET_NAME || echo "📦 Bucket already exists"
+mc version enable local/$BUCKET_NAME
+
+echo "✅ Bucket '$BUCKET_NAME' is ready with versioning enabled."

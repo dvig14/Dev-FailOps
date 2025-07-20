@@ -45,3 +45,7 @@ resource "null_resource" "vagrant_destroy" {
     working_dir = "${path.module}/../../output" 
   }
 }
+
+resource "random_id" "demo_for_import_fix" {
+  byte_length = 4
+}

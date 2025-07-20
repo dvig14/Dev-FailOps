@@ -4,7 +4,7 @@ This is the **last resort** recovery method — use it only when no other fix wo
 
 Now you can simulate this using **Step 7 shown in README**:
 
-[Re-Apply After State Loss](./README.md#-steps-to-break-it-7--re-apply-after-state-loss)
+[Re-Apply After State Loss](./README.md#-steps-to-break-it-7-re-apply-after-state-loss)
 
 [Destroy or Halt VMs After Completion](../../README.md#-destroy-or-halt-vms-after-scenario-completion)
 
@@ -19,7 +19,7 @@ Now you can simulate this using **Step 7 shown in README**:
 
 <br>
 
-### ✅ Real-World AWS infra example:
+## ✅ Real-World AWS infra example:
 
 Let's say your setup creates:
 
@@ -96,7 +96,7 @@ Open AWS Console:
 
 <br>
 
-### 🔁 Step 5: Re-run Terraform
+### 🔁 Re-run Terraform
 
 ```bash
 terraform init

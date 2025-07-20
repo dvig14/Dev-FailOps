@@ -34,7 +34,7 @@ terraform import random_id.demo_for_import_fix _3gKv
 
 ✅ You'll see a success message like:
 
-![Import successfull](./assets/import.png)
+[Import successfull](./assets/import.png)
 
 <br>
 
@@ -44,10 +44,7 @@ terraform import random_id.demo_for_import_fix _3gKv
 * Navigate to your Terraform state bucket.
 * You'll see that the `terraform.tfstate` file is immediately recreated and now includes the `random_id` resource.
 
-<br>
-
-### 🔍 Verify the Import
-[Verify](./verify.md#-verify-path-2-rebuild-state-using-terraform-import)
+### [🔍 Verify the Import](./verify.md#-verify-path-2-rebuild-state-using-terraform-import)
 
 <br>
 
@@ -133,8 +130,8 @@ Here’s what Terraform does behind the scenes:
 - In large production: No, we automate manual import doesn't scale. 
 
 Using Tools like:
-[Terraformer](https://github.com/GoogleCloudPlatform/terraformer)
-[Terracognita](https://cycloid.io/terracognita/)
+- [Terraformer](https://github.com/GoogleCloudPlatform/terraformer)
+- [Terracognita](https://cycloid.io/terracognita/)
 
 They:
 
@@ -154,5 +151,5 @@ This avoids **100+** manual imports.
 
 <br>
 
-[👉 Fix Path 3: `Recreate + Manually clean orphaned infra`](./fix-path-3.md)
+[👉 Fix Path 3: Recreate + Manually clean orphaned infra](./fix-path-3.md)
 > Before that insure `tfstate` file is deleted!

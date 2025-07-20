@@ -7,7 +7,7 @@
 - [Why Use Remote Backend](#-why-use-a-remote-backend-like-minio)
 - [What Happens When It’s Deleted](#-what-happens-if-the-state-file-is-deleted)
 - [Real World AWS Example](#-real-world-impact)
-- [Fix Guide](./fix.md)
+- [Fix Guide](#-next-step-how-to-fix-it-(With-Examples))
 
 <br>
 
@@ -84,8 +84,8 @@ Let’s simulate what happens when it’s **deleted**.
    - This provisions your VM and stores state in MinIO.
    - Terraform tracks all resources.
 
-   ![Resource creation](./assets/creation.gif)
-   ![Resources created](./assets/created.png)
+   - [Resource creation](./assets/creation.gif)
+   - [Resources created](./assets/created.png)
 
 <br>
 
@@ -98,7 +98,7 @@ Let’s simulate what happens when it’s **deleted**.
      - 1st time - It will destroy one resource because its how I designed logic for vagrantfile to not upgrade once vm enabled
      - 2nd time - It should show: **No changes** Infrastructure matches the configuration.
 
-   ![No changes](./assets/no_changes.png)
+   - [No changes](./assets/no_changes.png)
 
 <br>
 
@@ -109,7 +109,7 @@ Let’s simulate what happens when it’s **deleted**.
    ```
    - Save the `id` field, you'll use it to import the resource back into state needed (for `terraform import`) fix.
 
-   ![Resource id](./assets/resource_id.png)
+   - [Resource id](./assets/resource_id.png)
 
 <br>
 
@@ -127,7 +127,7 @@ Let’s simulate what happens when it’s **deleted**.
 
    ❌ It doesn't because Terraform has no memory of the resource anymore!
 
-   ![Untracked resources](./assets/no_destroy.png)
+   - [Untracked resources](./assets/no_destroy.png)
 
    > It will create `empty tfstate file`
    > {
@@ -144,7 +144,7 @@ Let’s simulate what happens when it’s **deleted**.
 **6. 🎯 The VM is still running:**
    - No more tracking. 
   
-   ![Orphaned VMs](./assets/orphaned_vm.png)
+   - [Orphaned VMs](./assets/orphaned_vm.png)
 
 <br>
 
@@ -162,8 +162,8 @@ Let’s simulate what happens when it’s **deleted**.
    - Now Terraform sees no state
    - So it thinks nothing exists and tries to create all resources again
 
-   ![Re-creation](./assets/re_creation.png)
-   ![After re-creation](./assets/orphaned_vm.png)
+   - [Re-creation](./assets/re_creation.png)
+   - [After re-creation](./assets/orphaned_vm.png)
   
 <br>
 
@@ -277,6 +277,6 @@ app.example.com ➝ Still points to old IP
 
 ### ✅ Next Step How to Fix It (With Examples)
 
-👉 [Restore backup from MinIO versioning](./fix-path-1.md)
-👉 [Rebuild State Using `terraform import`](./fix-path-2.md)
-👉 [Recreate + Manually clean orphaned infra](./fix-path-3.md)
+- 👉 [Restore backup from MinIO versioning](./fix-path-1.md)
+- 👉 [Rebuild State Using `terraform import`](./fix-path-2.md)
+- 👉 [Recreate + Manually clean orphaned infra](./fix-path-3.md)

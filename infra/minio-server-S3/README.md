@@ -101,7 +101,7 @@ EOF
 
 <br>
 
-## ▶️ Step 7: Enable and Start MinIO
+## Step 7: Enable and Start MinIO
 
 Reload systemd and start the service:
 
@@ -113,7 +113,7 @@ sudo systemctl start minio
 
 <br>
 
-## ✅ Output
+## Output
 
 ```text
 MinIO server started. Access it at http://192.168.56.22:9000
@@ -136,7 +136,7 @@ minio.vm.network "private_network", ip: "192.168.56.22"
 
 ## Here we now install mc for enabling versioning
 
-### ▶️ Step 1: Waiting for MinIO to live
+### ▶ Step 1: Waiting for MinIO to live
 
 ```bash
 echo "⏳ Waiting for MinIO to be live..."
@@ -148,7 +148,7 @@ echo "✅ MinIO is live!"
 
 <br>
 
-### ▶️ Step 2: Download and install mc (MinIO Client)
+### ▶ Step 2: Download and install mc (MinIO Client)
 
 ```bash
 wget https://dl.min.io/client/mc/release/linux-amd64/mc -O mc
@@ -159,7 +159,7 @@ sudo mv mc /usr/local/bin/
 
 <br>
 
-### ▶️ Step 3: Configure mc to talk to your MinIO server
+### ▶ Step 3: Configure mc to talk to your MinIO server
 
 ```bash
 mc alias set local http://localhost:9000 "$MINIO_USER" "$MINIO_PASS"
@@ -173,7 +173,7 @@ mc alias set local http://localhost:9000 "$MINIO_USER" "$MINIO_PASS"
 
 <br>
 
-### ▶️ Step 4: Create a versioned bucket
+### ▶ Step 4: Create a versioned bucket
 
 ```bash
 BUCKET_NAME="terra-state"
@@ -189,7 +189,7 @@ mc version enable local/$BUCKET_NAME
 
 <br>
 
-## ✅ Why `localhost` is used even though MinIO has a private IP?
+## Why `localhost` is used even though MinIO has a private IP?
 
 You're right: **your VM is exposed on `192.168.56.22`**.
 
@@ -207,7 +207,6 @@ But inside the VM, from the VM's point of view, MinIO is running **on itself**, 
 | Your **host machine** | Refers to your **host OS** (e.g., Windows/Linux) | You run a React app and visit `http://localhost:3000` |
 | Your **VM (MinIO)**   | Refers to the **guest OS inside VM**         | Inside the VM, you run `minio server` on port 9000, so it's accessible at `http://localhost:9000` **within that VM only** |
 
-So yes:
 
 > Just like your React app runs on your local machine and you open `localhost:3000`, MinIO inside the VM runs on port `9000`, and from **inside the VM**, it's `localhost:9000`.
 

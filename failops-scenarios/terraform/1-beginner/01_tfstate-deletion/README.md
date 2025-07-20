@@ -4,10 +4,10 @@
 
 ## 📚 Contents
 - [What is terraform.tfstate?](#-what-is-terraformtfstate-and-why-is-it-needed)
-- [Why Use Remote Backend](#why-use-a-remote-backend-like-minio)
-- [What Happens When It’s Deleted](#what-happens-if-the-state-file-is-deleted)
-- [Real World AWS Example](#real-world-impact)
-- [Fix Guide](#next-step-how-to-fix-it-with-examples)
+- [Why Use Remote Backend](#-why-use-a-remote-backend-like-minio)
+- [What Happens When It’s Deleted](#-what-happens-if-the-state-file-is-deleted)
+- [Real World AWS Example](#-real-world-impact)
+- [Fix Guide](#-next-step-how-to-fix-it-with-examples)
 
 <br>
 

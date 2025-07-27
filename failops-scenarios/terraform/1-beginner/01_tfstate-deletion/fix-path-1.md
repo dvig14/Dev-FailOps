@@ -12,6 +12,18 @@ In local Vagrant labs, this might look safe, but in **real cloud**, it's a **ser
 
 <br>
 
+## 🧠 Ask These Before You Fix
+
+1. Is versioning enabled on your remote backend (e.g. MinIO / S3)?
+2. Does the infra still exist physically?
+3. Do you know what resources were created (e.g. VMs) and have access to the resource IDs?
+4. Is this environment **production or safe to destroy**?
+5. Can you safely recreate the infra — or must you restore it?
+
+Your answers guide which **fix path** is safest.
+
+<br>
+
 ## 🗂 Fix Path 1: Restore backup from MinIO versioning
 
 ### 🧠 What is Versioning?
@@ -59,7 +71,7 @@ terraform plan
 ```
 
 * Output will show **Terraform wants to create all resources again**, because it **thinks nothing exists**.
-- [Before restoring](./assets/plan_before_fix.png)
+- 📸 [Before restoring](./assets/plan_before_fix.png)
 
 <br>
 
@@ -74,7 +86,7 @@ terraform plan
 
 <br>
 
-### 🧑‍💼 Real-World Scenario: Why This Matters
+## 🧑‍💼 Real-World Scenario: Why This Matters
 
 Imagine you're working in production:
 
@@ -91,7 +103,7 @@ But with versioning enabled:
 
 <br>
 
-### 🧨 What If Versioning Wasn’t Enabled?
+## 🧨 What If Versioning Wasn’t Enabled?
 
 You're in trouble.
 
@@ -99,6 +111,6 @@ You're in trouble.
 * Apply will **recreate** everything.
 * Real servers or data could be **duplicated** or **overwritten**.
 
-That's when we switch to [👉 Fix Path 2: terraform import](./fix-path-2.md)
+That's when we switch to [👉 Fix Path 2: Rebuild State Using `terraform import`](./fix-path-2.md)
 
 > Before starting that, delete the current version state file. 

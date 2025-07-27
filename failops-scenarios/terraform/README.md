@@ -104,7 +104,9 @@ Navigate to the MinIO setup directory and bring up the VM. Before running `vagra
 ```bash
 cd infra/minio-server-S3
 
-# load creditionals just need to run once 
+# load creditionals
+# just need to run (source ../../env) once at start
+# Next time creditionals are saved until you change again or destroy vm
 source ../../.env
 vagrant up
 ```
@@ -118,7 +120,7 @@ vagrant up
 
 <br>
 
-### 4️⃣ Create bucket
+### 4️⃣ Create bucket If not created
  
  Open the MinIO Console at:
 👉 [http://192.168.56.22:9001](http://192.168.56.22:9001)
@@ -145,8 +147,9 @@ source ../../../.env
 terraform init -backend-config="key=terra-scenarios/{scenario-name}/terraform.tfstate"
 terraform plan
 
-# Run only sandbox for terraform FailOps this will add this vm in vagrantfile 
-# then afterwards can simply halt, up again until you enabled other vm 
+# Run this (-var="sandbox_enable=true") only once at start of any first scenario
+# As for terraform FailOps this will add sandbox vm in vagrantfile 
+# then afterwards can simply apply until you enabled other vm or terraform destroy this one
 terraform apply -var="sandbox_enable=true"
 
 # Optional: check all vms created by opening `VirtualBox` or run:
@@ -193,7 +196,7 @@ failops-scenarios/terraform/1-beginner/01_tfstate-deletion/
 ```bash
 cd infra/minio-server-S3
 
-# 🔸 Option 1: Temporarily halt the VM (recommended if reused later)
+# 🔸 Option 1: Temporarily halt the VM (recommended)
 vagrant halt
 
 # 🔻 Option 2: Permanently destroy the VM

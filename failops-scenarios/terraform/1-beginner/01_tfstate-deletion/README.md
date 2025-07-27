@@ -1,12 +1,19 @@
-# 🧨 Scenario: `01_tfstate-deletion`
+# 🧨 Scenario: `tfstate-deletion`
+
+<br>
+
+[⚠️ Before Starting Setup Safe Environment](../../../safe-env.md)
 
 <br>
 
 ## 📚 Contents
-- [What is terraform.tfstate?](#-what-is-terraformtfstate-and-why-is-it-needed)
+
+- [What is terraform.tfstate](#-what-is-terraformtfstate-and-why-is-it-needed)
 - [Why Use Remote Backend](#️-why-use-a-remote-backend-like-minio)
 - [Break Local Simulation](#-what-happens-if-the-state-file-is-deleted)
 - [Real World AWS Example](#-real-world-impact)
+- [Risks And Consequences](#-risks-and-consequences)
+- [Mental Model Guide](#-before-you-pick-a-fix)
 - [Fix Guide](#-next-step-how-to-fix-it-with-examples)
 
 <br>
@@ -79,111 +86,126 @@ Let’s simulate what happens when it’s **deleted**.
 
 ### 🔬 Steps to Break It
 
-**1. Assumption:** You’ve already started the MinIO server, created the S3 bucket, and initialized Terraform.
+### 1. Assumption: You’ve already started the MinIO server, created the S3 bucket, and initialized Terraform.
 
-   - This provisions your VM and stores state in MinIO.
-   - Terraform tracks all resources.
+- This provisions your VM and stores state in MinIO.
+- Terraform tracks all resources.
 
-   - [Resource creation](./assets/creation.gif)
-   - [Resources created](./assets/created.png)
+- 📸 [Resource creation](./assets/creation.gif)
+- 📸 [Resources created](./assets/created.png)
 
 <br>
 
-**2. Confirm state tracking works** 
+### 2. Confirm state tracking works
  
-   ```bash
-     terraform apply
-   ```
-   - Run 2 times :
-     - 1st time - It will destroy one resource because its how I designed logic for vagrantfile to not upgrade once vm enabled
-     - 2nd time - It should show: **No changes** Infrastructure matches the configuration.
+```bash
+ terraform apply
+```
+- Run 2 times if you did this (`terraform apply -var="sandbox_enable=true"`) during **step-1**:
+  - 1st time - It will destroy one resource because its how I designed logic for vagrantfile to not upgrade once vm enabled
+  - 2nd time - It should show: **No changes** Infrastructure matches the configuration.
 
-   - [No changes](./assets/no_changes.png)
-
-<br>
-
-**3. Get the Resource ID of `random_id.demo_for_import_fix`**
-
-   ```bash
-     terraform state show random_id.demo_for_import_fix
-   ```
-   - Save the `id` field, you'll use it to import the resource back into state needed (for `terraform import`) fix.
-
-   - [Resource id](./assets/resource_id.png)
+- [Read how plan and apply works](../../../mental-models/terraform-model.md)
+- 📸 [No changes](./assets/no_changes.png)
 
 <br>
 
-**4. ❌ Now delete `terraform.tfstate` file manually from MinIO.**
+### 3. Get the Resource ID of `random_id.demo_for_fix`
+
+```bash
+terraform state show random_id.demo_for_fix
+```
+- Save the `id` field, you'll use it in one of fixes.
+
+- 📸 [Resource id](./assets/resource_id.png)
 
 <br>
 
-**5. ⛔ Try to destroy infra** 
-
-   ```bash
-     terraform destroy
-   ```
-   - Expected: It should destroy the VM
-   - Reality: Nothing to destroy.
-
-   ❌ It doesn't because Terraform has no memory of the resource anymore!
-
-   - [Untracked resources](./assets/no_destroy.png)
-
-   > It will create `empty tfstate file`
-   > {
-   >   "version": 4,
-   >   "terraform_version": "1.8.x",
-   >   "serial": 0,
-   >   "lineage": "new-lineage-id",
-   >   "outputs": {},
-   >   "resources": []
-   > }
+### 4. ❌ Now delete `terraform.tfstate` file manually from MinIO.
 
 <br>
 
-**6. 🎯 The VM is still running:**
-   - No more tracking. 
+### 5. ⛔ Try to destroy infra
+
+```bash
+terraform destroy
+```
+- Expected: It should destroy the VM
+- Reality: Nothing to destroy.
+
+**Why This Happens** 
+- Terraform **relies entirely on its state file** to track what infrastructure exists.
+- But in this case:
+  * The **state file was deleted**.
+  * Terraform now has **no memory** of what it created earlier.
   
-   - [Orphaned VMs](./assets/orphaned_vm.png)
+  > So, it assumes:
+  > ❌ I didn’t create anything, so I have nothing to destroy.
+
+- [Read how destroy works](../../../mental-models/terraform-model.md#-terraform-destroy-behavior)
+- 📸 [Untracked resources](./assets/no_destroy.png)
 
 <br>
 
-**7. 🔁 Re-Apply After State Loss:**
+**📦 Terraform Re-creates a Blank State File**
+
+When the original state file is missing, Terraform silently generates a new empty one:
+
+```json
+{
+  "version": 4,
+  "terraform_version": "1.8.x",
+  "serial": 0,
+  "lineage": "new-lineage-id",
+  "outputs": {},
+  "resources": []
+}
+```
    
-   > ❌ Do NOT run this unless you want to recreate all resources.
-   > This step is just to demonstrate what happens if `*.tfstate` is deleted and `terraform apply` again.  
+<br>
+
+### 6. 🎯 The VM is still running:
+- No more tracking. 
+- 📸 [Orphaned VMs](./assets/orphaned_vm.png)
 
 <br>
 
-   ```bash
-     terraform plan
-     terraform apply
-   ```
-   - Now Terraform sees no state
-   - So it thinks nothing exists and tries to create all resources again
+### 7. 🔁 Re-Apply After State Loss:
+   
+> ❌ Do NOT run this unless you want to recreate all resources.
+> This step is just to demonstrate what happens if `*.tfstate` is deleted and `terraform apply` again.  
 
-   - [Re-creation](./assets/re_creation.png)
-   - [After re-creation](./assets/orphaned_vm.png)
+<br>
+
+```bash
+ terraform plan
+ terraform apply
+```
+- Now Terraform sees no state
+- So it thinks nothing exists and tries to create all resources again
+
+- 📸 [Re-creation](./assets/re_creation.png)
+- 📸 [After re-creation](./assets/orphaned_vm.png)
   
 <br>
 
-   > Even though `virtualbox` or `vagrant global-status` shows 1 sandbox VM running,
-   > it's because **Vagrant handles VM lifecycles itself** — it doesn't create a new VM of the same name.
-   >
-   > Terraform, however, doesn't know that. Since the `.tfstate` is deleted,
-   > it **runs the Vagrant commands again** via `local-exec`, thinking it’s provisioning from scratch.
-   > But under the hood, Vagrant just **spins up the same existing VM** — no duplicate VMs are created.
-   >
-   > Terraform simply records this as a "new" resource in the `.tfstate`,
-   > even though **nothing fresh was actually created**.
+> Even though `virtualbox` or `vagrant global-status` shows 1 sandbox VM running,
+> it's because **Vagrant handles VM lifecycles itself** — it doesn't create a new VM of the same name.
+>
+> Terraform, however, doesn't know that. Since the `.tfstate` is deleted,
+> it **runs the Vagrant commands again** via `local-exec`, thinking it’s provisioning from scratch.
+> But under the hood, Vagrant just **spins up the same existing VM** — no duplicate VMs are created.
+>
+> Terraform simply records this as a "new" resource in the `.tfstate`,
+> even though **nothing fresh was actually created**.
   
 <br>
 
-   ⚠️ **Important:**
+⚠️ **Important:**
 
-   > In **real cloud providers** like AWS, Azure, GCP — there’s **no Vagrant-like mechanism** to detect existing resources.
-   > So **deleting `.tfstate` and running `terraform apply` again will provision actual new infrastructure**
-   > (e.g., a **new EC2 instance**), potentially causing **duplicate and orphaned resources** and unexpected **billing.**
+> In **real cloud providers** like AWS, Azure, GCP — there’s **no Vagrant-like mechanism** to detect existing resources.
+> So **deleting `.tfstate` and running `terraform apply` again will provision actual new infrastructure**
+> (e.g., a **new EC2 instance**), potentially causing **duplicate and orphaned resources** and unexpected **billing.**
 
 <br>
 
@@ -214,9 +236,9 @@ This setup:
 * Gets its public IP ✅
 * Creates a DNS record (via Route 53):
 
-  ```
+```
   app.example.com ➝ 3.7.212.15
-  ```
+```
 
 <br>
 
@@ -275,8 +297,21 @@ app.example.com ➝ Still points to old IP
 
 <br>
 
+## ❓ Before you pick a fix…
+
+- Go to [mental-model.md](../../../mental-models/terraform-model.md#-failure-root-map-where-things-go-wrong)
+- Find which **core problem type** your failure matches.
+- Then return here and see which fix path applies.
+
+<br>
+
 ## ✅ Next Step How to Fix It (With Examples)
+
+<details>
+<summary>Fix Guide</summary>
 
 - 👉 [Restore backup from MinIO versioning](./fix-path-1.md)
 - 👉 [Rebuild State Using `terraform import`](./fix-path-2.md)
 - 👉 [Recreate + Manually clean orphaned infra](./fix-path-3.md)
+
+</details>

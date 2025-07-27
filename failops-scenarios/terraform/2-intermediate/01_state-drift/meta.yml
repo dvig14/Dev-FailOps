@@ -1,0 +1,5 @@
+title: "01_state-drift"
+level: intermediate
+tools: [terraform, minio]
+impact: ["System crash", "security risk"]
+description: "State drift → terraform don't know about changes outside it"

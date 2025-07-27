@@ -46,6 +46,14 @@ resource "null_resource" "vagrant_destroy" {
   }
 }
 
-resource "random_id" "demo_for_import_fix" {
+resource "random_id" "demo_for_fix" {
   byte_length = 4
+}
+
+resource "local_file" "example" {
+  filename = "${path.module}/../../provision/sandbox.sh"
+  content  = <<EOT
+  #!/bin/bash
+  echo Hello from sandbox VM, no real provisioning needed.
+  EOT
 }

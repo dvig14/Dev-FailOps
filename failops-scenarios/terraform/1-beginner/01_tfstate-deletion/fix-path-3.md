@@ -4,7 +4,7 @@ This is the **last resort** recovery method — use it only when no other fix wo
 
 Now you can simulate this using **Step 7 shown in README**:
 
-[Re-Apply After State Loss](./README.md#-steps-to-break-it)
+[Re-Apply After State Loss](./README.md#7--re-apply-after-state-loss)
 
 [Destroy or Halt VMs After Completion](../../README.md#-destroy-or-halt-vms-after-scenario-completion)
 

@@ -1,8 +1,7 @@
 ## 🗂 Verify Path 1: Restore backup from MinIO versioning
 
-Once you've restored the correct version of the `terraform.tfstate` file from MinIO, it's time to verify everything works as expected.
+> Once you've restored the correct version of the `terraform.tfstate` file from MinIO, it's time to verify everything works as expected.
 
-<br>
 
 ### 🔍 Step: Run Terraform Plan
 
@@ -10,7 +9,7 @@ Once you've restored the correct version of the `terraform.tfstate` file from Mi
 terraform plan
 ```
 
-[After Restoring](./assets/after_restoring_plan.png)
+📸 [After Restoring](./assets/after_restoring_plan.png)
 
 <br>
 
@@ -30,7 +29,7 @@ terraform plan
 terraform apply
 ```
 
-[No new resource created](./assets/no_changes.png)
+📸 [No new resource created](./assets/no_changes.png)
 
 <br>
 
@@ -44,12 +43,8 @@ terraform apply
 <br>
 
 > 🎯 **Key Insight:**
-> Even if your `terraform.tfstate` is deleted, **versioning in MinIO (or S3)** ensures you can **quickly restore** a previous state and **avoid any destructive actions**.
-
-> Always **enable versioning** on your state storage backend — it's your safety net!
->
-> If don't want to proceed further and want to resume later on 
-> [Destroy or Halt VMs After Completion](../../README.md#-destroy-or-halt-vms-after-scenario-completion)
+> - Even if your `terraform.tfstate` is deleted, **versioning in MinIO (or S3)** ensures you can **quickly restore** a previous state and **avoid any destructive actions**.
+> - Always **enable versioning** on your state storage backend — it's your safety net!
 
 <br>
 
@@ -61,8 +56,8 @@ After importing, let's verify that Terraform tracks the resource and doesn't rec
 terraform plan
 ```
 
-- [Plan Output](./assets/verify_import.png)
-- [Resource you imported](./assets/import_id.png)
+- 📸 [Plan Output](./assets/verify_import.png)
+- 📸 [Resource you imported](./assets/import_id.png)
 
 <br>
 
@@ -116,9 +111,6 @@ What happens?
 I don't see any config for aws_instance.my_vm, so I'll delete it!
 ```
 
-- 🔄 Result:
-- ✅ Terraform updates the state to include that EC2 instance.
-
 <br>
 
 ### 🚨 Why This Happens
@@ -134,9 +126,6 @@ So if the `.tf` config **doesn't declare** a resource that’s in state:
 
 > Terraform assumes you’ve deleted it from your desired setup
 > → So it marks the resource for destruction.
->
-> If don't want to proceed further and want to resume later on 
-> [Destroy or Halt VMs After Completion](../../README.md#-destroy-or-halt-vms-after-scenario-completion)
 
 <br>
 
@@ -146,3 +135,7 @@ So if the `.tf` config **doesn't declare** a resource that’s in state:
 - 🧪 Import only when resource `already exists`
 - ✅ After import, run `terraform plan` to validate sync
 
+<br>
+
+> If don't want to proceed now and want to resume later on 
+> [Destroy or Halt VMs After Completion](../../README.md#-destroy-or-halt-vms-after-scenario-completion)

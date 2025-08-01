@@ -17,7 +17,9 @@ Each scenario lives in its own folder under `failops-scenarios/` and includes:
 > *⚠️ NOTE*: I’m a DevOps learner building this lab to simulate what can go wrong. 
 > Everything you see here is the result of me breaking it, debugging it, and teaching myself — with help from logs, AI, docs, and real-world stories.
 >
-> If you're learning DevOps, join me! This repo is made for people like us 🚀
+> 🧪 This project is actively being developed in public.
+> New scenarios are added every week. [📜 See Changelog](./CHANGELOG.md) or follow on [@diksha_vig15](https://x.com/diksha_vig15)
+
 
 <br>
 

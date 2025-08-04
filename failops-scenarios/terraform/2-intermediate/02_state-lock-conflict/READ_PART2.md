@@ -66,7 +66,7 @@ http://127.0.0.1:8500/
 
 > In real-world use, teams typically use **S3 + DynamoDB** for state storage and locking.
 
-* 📸 [See backend.tf](./assets/consul.png)
+📸 [See backend.tf](./assets/consul.png)
 
 <br>
 
@@ -89,9 +89,11 @@ If:
 * ❌ No state found → Treats it as a **fresh project**, planning to re-create all resources.
 * ✅ State exists (Manually added or Migrated from minio) → Uses the **Consul state file**.
 
+<br>
+
 > ⚠️ Existing `.tfstate` from MinIO **is not migrated automatically.**
 
-* 📸 [Reconfigured backend](./assets/reconfigure.png)
+📸 [Reconfigured backend](./assets/reconfigure.png)
 
 <br>
 
@@ -111,7 +113,7 @@ Stored as key-value:
 * Key: `terraform/state/app`
 * Value: Terraform state file contents
 
-- 📸 [Acquiring state lock & Creating resources](./assets/initial_apply.png)
+📸 [Acquiring state lock & Creating resources](./assets/initial_apply.png)
 
 <br>
 
@@ -120,14 +122,16 @@ Stored as key-value:
 * **User A**: Modifies the content of a `local_file` resource.
 * **User B**: Adds a new resource `random_id.state_conflict`.
 
-* 📸 [Code changes example](./assets/code_change.gif)
+📸 [Code changes example](./assets/code_change.gif)
 
 <br>
 
 ### 7. Simulate parallel `terraform apply`
 
-1. Run `terraform apply` in **User A’s** terminal.
-2. After that, try the same in **User B’s** terminal.
+- Run `terraform apply` in **User A’s** terminal.
+- After that, try the same in **User B’s** terminal.
+
+<br>
 
 > ⚠️ **Don’t confirm with "yes" yet**:
 >
@@ -141,7 +145,7 @@ Stored as key-value:
 > 4. Go back to `http://localhost:8500` → **Key/Value** tab → open the `terraform/state` path.
 >     **Refresh** - you should now see that the lock entries are gone, meaning the state is no longer locked.
 
-* 📸 [Output showing lock for User-B](./assets/lock-b.png)
+📸 [Output showing lock for User-B](./assets/lock-b.png)
 
 <br>
 
@@ -175,9 +179,11 @@ In **User B’s** terminal, run:
 ```bash
 terraform apply
 ```
-* 📸 [Apply User-B](./assets/apply-b.png)
+📸 [Apply User-B](./assets/apply-b.png)
 
 ✅ Since User A’s apply was canceled, the lock is released → User B can now apply.
+
+<br>
 
 > ⚠️ **Confirm with "yes" then press `Ctrl+C` to interrupt apply**:
 >
@@ -185,7 +191,7 @@ terraform apply
 >  - **Refresh** - the lock entries are still present.
 >  - This results in a **stale lock**, which can block future operations indefinitely.
 
-* 📸 [Stale lock](./assets/lock-a.png)
+📸 [Stale lock](./assets/lock-a.png)
 
 <br>
 

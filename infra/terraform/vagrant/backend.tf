@@ -1,4 +1,7 @@
 terraform {
+
+  # === S3 Backend (MinIO) — No Locking ===
+
   backend "s3" {
     bucket                      = "terra-state"
     key                         = "demo.tfstate"
@@ -11,4 +14,13 @@ terraform {
     skip_requesting_account_id  = true
     use_path_style              = true
   }
+
+  # === Consul Backend (With Locking) ===
+  # Comment out the above S3 block and uncomment the below block when testing lock conflict
+
+  # backend "consul" {
+  #  address = "127.0.0.1:8500"
+  #  path    = "terraform/state/app"
+  # }
+
 }

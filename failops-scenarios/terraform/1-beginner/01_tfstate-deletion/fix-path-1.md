@@ -56,9 +56,9 @@ That means:
 
 * Click the file name (`terraform.tfstate`)
 * Select the **"Display Object Versions"** tab
-  - [Display Object Versions](./assets/minio.png)
+  - 📸 [Display Object Versions](./assets/minio.png)
 * You'll see a list of past versions:
-  - [All state versions](./assets/versions.png)
+  - 📸 [All state versions](./assets/versions.png)
 
 > ℹ️ The latest version (at the top) is empty state created after `terraform destroy`.
 

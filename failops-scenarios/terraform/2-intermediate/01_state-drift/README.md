@@ -9,7 +9,7 @@
 ## 📚 Contents
 
 - [What Is State Drift And Why It Happens](#-what-is-state-drift)
-- [Simulating Drift Locally](#-what-happens-if-we-change-something-outside-terraform)
+- [Simulation -> Drift Locally](#-what-happens-if-we-change-something-outside-terraform)
 - [Real World AWS Example](#-real-world-impact)
 - [Potential Risks Of Drift](#️-potential-risks-in-prod-from-drift)
 - [Mental Model Guide](#-before-you-pick-a-fix)
@@ -63,7 +63,7 @@ Terraform relies on the `.tfstate` file to know what exists and how it was last 
    - 1st time - It will destroy one resource because its how I designed logic for vagrantfile to not upgrade once vm enabled
    - 2nd time - It should show: **No changes** Infrastructure matches the configuration.
 
-- [How plan and apply works](../../../mental-models/terraform-model.md)
+- 📘 [How plan and apply works](../../../mental-models/terraform-model.md)
 - 📸 [No changes](./assets/no_changes.png)
 
 <br>
@@ -276,7 +276,7 @@ Even though `terraform apply` **asks for approval** (interactive prompt), this d
 
 ## ❓ Before you pick a fix…
 
-- Go to [mental-model.md](../../../mental-models/terraform-model.md#-failure-root-map-where-things-go-wrong)
+- Go to 📘 [mental-model.md](../../../mental-models/terraform-model.md#-failure-root-map-where-things-go-wrong)
 - Find which **core problem type** your failure matches.
 - Then return here and see which fix path applies.
 

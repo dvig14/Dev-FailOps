@@ -105,7 +105,7 @@ Let’s simulate what happens when it’s **deleted**.
   - 1st time - It will destroy one resource because its how I designed logic for vagrantfile to not upgrade once vm enabled
   - 2nd time - It should show: **No changes** Infrastructure matches the configuration.
 
-- [Read how plan and apply works](../../../mental-models/terraform-model.md)
+- 📘 [How plan and apply works](../../../mental-models/terraform-model.md)
 - 📸 [No changes](./assets/no_changes.png)
 
 <br>
@@ -142,7 +142,7 @@ terraform destroy
   > So, it assumes:
   > ❌ I didn’t create anything, so I have nothing to destroy.
 
-- [Read how destroy works](../../../mental-models/terraform-model.md#-terraform-destroy-behavior)
+- 📘 [How destroy works](../../../mental-models/terraform-model.md#-terraform-destroy-behavior)
 - 📸 [Untracked resources](./assets/no_destroy.png)
 
 <br>
@@ -299,7 +299,7 @@ app.example.com ➝ Still points to old IP
 
 ## ❓ Before you pick a fix…
 
-- Go to [mental-model.md](../../../mental-models/terraform-model.md#-failure-root-map-where-things-go-wrong)
+- Go to 📘 [mental-model.md](../../../mental-models/terraform-model.md#-failure-root-map-where-things-go-wrong)
 - Find which **core problem type** your failure matches.
 - Then return here and see which fix path applies.
 

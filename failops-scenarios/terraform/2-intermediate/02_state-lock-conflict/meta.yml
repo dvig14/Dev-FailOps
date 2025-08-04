@@ -1,0 +1,5 @@
+title: "02_state-lock-conflict"
+level: intermediate
+tools: [terraform, minio]
+impact: ["Fail multiple jobs", "Can't access state"]
+description: "State lock → multiple people can't edit infra at the same time"

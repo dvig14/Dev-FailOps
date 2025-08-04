@@ -75,7 +75,7 @@ Failures are where real learning begins.
 This project helps you:
 - Simulate chaos 💥
 - Fix it calmly 🧘‍♀️
-- Document like a real engineer 🛠
+- Document it 📘
 
 <br>
 

@@ -14,12 +14,8 @@ Each scenario lives in its own folder under `failops-scenarios/` and includes:
 
 <br>
 
-> *⚠️ NOTE*: I’m a DevOps learner building this lab to simulate what can go wrong. 
+> *⚠️ NOTE*: I’m still learning DevOps. This lab is my way of understanding how things break.
 > Everything you see here is the result of me breaking it, debugging it, and teaching myself — with help from logs, AI, docs, and real-world stories.
->
-> 🧪 This project is actively being developed in public.
-> New scenarios are added every week. [📜 See Changelog](./CHANGELOG.md) or follow on [@diksha_vig15](https://x.com/diksha_vig15)
-
 
 <br>
 
@@ -68,26 +64,6 @@ Dev-FailOps/
 ```
 <br>
 
-## 🧠 Why This Lab Exists
-
-Failures are where real learning begins.
-
-This project helps you:
-- Simulate chaos 💥
-- Fix it calmly 🧘‍♀️
-- Document like a real engineer 🛠
-
-<br>
-
-## 👏 Contribute or Follow Along
-
-You can:
-- ⭐ Star or fork the repo on GitHub
-- 🧪 Try a scenario and share your fix on X (Twitter)
-- 🧩 Submit your own broken setup via PR!
-
-<br>
-
 ## 🔐 .env.example
 Use this as your base for secrets:
 
@@ -103,3 +79,37 @@ echo $AWS_SECRET_ACCESS_KEY
 ```
 > ⚠️ Be sure your real .env is listed in .gitignore to keep secrets safe!
 
+<br>
+
+## 🔨 Contributions? Forks?
+
+This project is primarily a **self-learning lab** — everything here is tested, written, and maintained solo.
+
+* You’re welcome to **fork**, try simulations, or adapt the format for your own labs
+* If you see issues or ideas for failure cases, feel free to open a discussion!
+* **Currently not accepting direct contributions** (still evolving too fast)
+
+<br>
+
+## 🧠 Why This Lab Exists
+
+I realized I won’t really understand DevOps until I’ve **broken things intentionally** and fixed them.
+
+This project helps me:
+
+* Simulate failure 💥
+* Stay calm 🧘‍♀️
+* Fix it with clarity 🛠
+* Grow by documenting it 📖
+
+If it helps someone else too, that’s a bonus.
+
+<br>
+
+## 💬 Follow Progress
+
+I share regular updates here:
+* 💬 [@diksha_vig15](https://x.com/diksha_vig15)
+* 📜 [Changelog](./CHANGELOG.md)
+
+Thanks for visiting! 👋

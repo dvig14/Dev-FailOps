@@ -1,6 +1,6 @@
 title: "state drift"
 level: intermediate
-tools: [Terraform, MinIo]
+tools: [terraform, minIo]
 description: "State drift → terraform don't know about changes outside it"
 category: "terraform"
 created_at: 2025-07-27

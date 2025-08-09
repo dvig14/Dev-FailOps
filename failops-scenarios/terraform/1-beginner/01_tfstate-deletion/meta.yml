@@ -1,6 +1,6 @@
 title: "tfstate deletion"
 level: beginner
-tools: [Terraform, MinIo]
+tools: [terraform, minIo]
 description: "Deleted *.tfstate → loss of infra tracking"
 category: "terraform"
 created_at: 2025-07-21

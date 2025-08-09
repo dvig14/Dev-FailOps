@@ -56,7 +56,7 @@ data "template_file" "vagrantfile" {
   template = file("${path.module}/vagrantfile.tpl")
 
   vars = {
-    vms_json = jsonencode(local.vms_with_absolute_paths)
+    vms_json = jsonencode(local.vms_filtered)
   }
 }
 
@@ -74,7 +74,7 @@ resource "null_resource" "vagrantfile" {
 }
 ```
 
-* Template generates Vagrantfile using `vagrantfile.tpl` and `local.vms_with_absolute_paths`.
+* Template generates Vagrantfile using `vagrantfile.tpl` and `local.vms_filtered`.
 * Output saved to: `output/Vagrantfile`
 
 <br>
@@ -119,7 +119,7 @@ resource "null_resource" "vagrant_destroy" {
 ```
 
 <details>
-<summary>⚠️ Why NOT use variables ,for_each here?</summary>
+<summary>⚠️ Why NOT use variables, for_each here?</summary>
 
 #### 💡 Explanation:
 

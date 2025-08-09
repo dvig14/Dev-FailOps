@@ -27,7 +27,7 @@ with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
     f.write("> Auto-generated from `meta.yml` files.\n\n<br>\n\n")
 
     for category, scenarios in tables.items():
-        f.write(f"## {category} Failures\n\n")
+        f.write(f"## {category.title()} Failures\n\n")
         f.write("| ID | Title | Level | Tools | Description |\n")
         f.write("|----|-------|-------|-------|-------------|\n")
 
@@ -38,6 +38,8 @@ with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         )
 
         for i, s in enumerate(sorted_scenarios, start=1):
-            tools = " + ".join(s.get("tools", []))
-            f.write(f"| {i:02} | [{s['title']}]({s['folder_rel_path']}) | {s['level']} | {tools} | {s['description']} |\n")
+            tools_list = s.get("tools", [])
+            tools = " + ".join(f'{tool.title()}' for tool in tools_list)
+
+            f.write(f"| {i:02} | [{s['title']}]({s['folder_rel_path']}) | {s['level'].title()} | {tools} | {s['description']} |\n")
         f.write("\n")

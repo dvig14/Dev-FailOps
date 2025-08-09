@@ -1,0 +1,46 @@
+name: Update Failures README 
+
+on:
+  push:
+    branches:
+      - scenarios
+    paths:
+      - 'failops-scenarios/**/meta.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    # Checkout the repo code
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Setup Python environment
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    # Cache pip packages to speed up installs
+    - name: Cache pip
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    # Install dependencies (pyyaml here, or requirements.txt if you have one)
+    - name: Install dependencies
+      run: pip install pyyaml
+
+    - name: Generate Failures README
+      run: python scripts/generate_readme.py
+
+    - name: Commit and push changes
+      run: |
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+        git add failops-scenarios/README.md
+        git diff --cached --quiet || git commit -m "Auto-update failops-scenarios/README.md"
+        git push 

@@ -14,6 +14,8 @@ jobs:
     # Checkout the repo code
     - name: Checkout repository
       uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.PAT_TOKEN }}
 
     # Setup Python environment
     - name: Set up Python

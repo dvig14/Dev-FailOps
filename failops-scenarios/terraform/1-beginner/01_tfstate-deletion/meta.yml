@@ -4,3 +4,4 @@ tools: [terraform, minIo]
 description: "Deleted *.tfstate → loss of infra tracking"
 category: "terraform"
 created_on: 2025-07-21
+#severity: high

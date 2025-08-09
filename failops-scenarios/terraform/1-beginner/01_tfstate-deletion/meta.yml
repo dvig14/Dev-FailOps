@@ -1,5 +1,7 @@
-title: "01_tfstate-deletion"
+title: "tfstate deletion"
 level: beginner
-tools: [terraform, minio]
-impact: ["Infra duplication", "orphaned infra", "dangerous resets"]
+tools: [terraform, minIo]
 description: "Deleted *.tfstate → loss of infra tracking"
+category: "terraform"
+created_on: 2025-07-21
+#severity: high

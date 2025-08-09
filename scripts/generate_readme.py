@@ -33,7 +33,7 @@ with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
 
         sorted_scenarios = sorted(
             scenarios, 
-            key=lambda x: x['created_at'], 
+            key=lambda x: x['created_on'], 
             reverse=True
         )
 

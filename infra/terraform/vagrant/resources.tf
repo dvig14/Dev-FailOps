@@ -7,7 +7,7 @@ data "template_file" "vagrantfile" {
 }
 
 resource "null_resource" "vagrantfile" {
-  count = var.sandbox_enable || var.app_enable || var.jenkins_enable ? 1 : 0
+  count = var.sandbox_enable || var.app_enable ? 1 : 0
   
   provisioner "local-exec" {
     command = <<EOT

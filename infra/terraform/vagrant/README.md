@@ -61,7 +61,7 @@ data "template_file" "vagrantfile" {
 }
 
 resource "null_resource" "vagrantfile" {
-  count = var.sandbox_enable || var.app_enable || var.jenkins_enable ? 1 : 0
+  count = var.sandbox_enable || var.app_enable ? 1 : 0
   
   provisioner "local-exec" {
     command = <<EOT
@@ -198,11 +198,6 @@ variable "app_enable" {
   default = false
 }
 
-variable "jenkins_enable" {
-  type = bool
-  default = false
-}
-
 variable "vm_state" {
   description = "Vagrant action: up, halt, reload"
   type        = string
@@ -224,7 +219,7 @@ variable "vm_name" {
 
 | Scenario                        | Command                                                             |
 | ------------------------------- | ------------------------------------------------------------------- |
-| Enable vms you want to run      | `terraform apply -var="jenkins_enable=true" -var="app_enable=true"` |
+| Enable vms you want to run      | `terraform apply -var="sandbox_enable=true" -var="app_enable=true"` |
 | Bring all vms up i.e enaled     | `terraform apply`                                                   |
 | Halt all VMs that are enabled   | `terraform apply -var="vm_state=halt"`                              |
 | Halt specific VM (`app`)        | `terraform apply -var="vm_state=halt" -var="vm_name=app"`           |

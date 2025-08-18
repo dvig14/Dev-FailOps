@@ -58,6 +58,7 @@ Dev-FailOps/
 │
 ├── infra/                   # Supporting infrastructure (per tool)
 │   ├── terraform/           # Terraform base config for scenarios
+│   ├── cicd/                # Explanation of Pipeline flow (dev-staging/prod)
 │   ├── minio-server-S3/     # S3 backend for tfstate storage
 │   ├── provision/           # Shell provisioners (e.g., setup-nginx.sh)
 │   └── output/              # Vagrantfile rendered by Terraform

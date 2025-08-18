@@ -8,11 +8,6 @@ variable "app_enable" {
   default = false
 }
 
-variable "jenkins_enable" {
-  type = bool
-  default = false
-}
-
 variable "vm_state" {
   type = string
   default = "up" # or "halt"

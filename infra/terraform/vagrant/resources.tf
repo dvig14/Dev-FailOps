@@ -17,6 +17,10 @@ resource "null_resource" "vagrantfile" {
     interpreter = ["bash", "-c"]
   }
 
+  triggers = {
+    always_run = "${timestamp()}"
+  }
+
 }
 
 

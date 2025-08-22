@@ -9,7 +9,7 @@ locals {
     },
     {
       name    = "app"
-      ip      = "192.168.56.11"
+      ip      = "192.168.57.11"
       memory  = 1024
       path    = "${path.module}/../provision/setup-nginx.sh"
       enabled = var.app_enable

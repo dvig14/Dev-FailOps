@@ -36,7 +36,7 @@ echo "<h1>Waiting for Production App</h1>" | sudo tee /var/www/my-app-prod/index
 cat << EOF | sudo tee /etc/nginx/sites-available/my-app-staging
 server {
     listen 81;
-    server_name 192.168.56.11;
+    server_name 192.168.57.11;
 
     root /var/www/my-app-staging;
     index index.html;
@@ -56,7 +56,7 @@ EOF
 cat << EOF | sudo tee /etc/nginx/sites-available/my-app-prod
 server {
     listen 80;
-    server_name 192.168.56.11;
+    server_name 192.168.57.11;
 
     root /var/www/my-app-prod;
     index index.html;
@@ -138,4 +138,4 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl enable my-app-backend-staging
 sudo systemctl enable my-app-backend-prod
-# Note: Do NOT start service yet, Jenkins deploy will handle this
+# Note: Service not started yet, Jenkins deploy will handle this

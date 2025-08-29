@@ -7,8 +7,8 @@ Vagrant.configure("2") do |config|
       vm_config.vm.box = "ubuntu/jammy64" 
       vm_config.vm.hostname = vm["name"] 
       vm_config.vm.network "private_network", ip: vm["ip"] 
-      vm_config.ssh.connect_timeout = 300
-      vm_config.vm.boot_timeout = 600  
+      vm_config.ssh.connect_timeout = 600
+      vm_config.vm.boot_timeout = 800  
       vm_config.vm.provider "virtualbox" do |vb|
         vb.memory = vm["memory"]
         vb.cpus = 1

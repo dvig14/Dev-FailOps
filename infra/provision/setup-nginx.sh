@@ -2,6 +2,14 @@
 
 set -e 
 
+# ------------------------- Setup SSH key for Jenkins ------------------------- #
+# Ensure Jenkins' public key is added so pipeline can SSH without password
+PUB_KEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHD1QbJidykLDMx3rbxs3thJ/cauoP2DBc1Qh8VqH7oipGtgSdYWou00+3gpXxdyAbYWxcTw3iRw5+y40Xwp1tZxXAyxa6/HxRSLRTTA2+j3JXhJTOY2mFEIJ16GgIPcsIjMsZMb9MCWg3GjXw+bQE27kAGHjQ78u6HUywKVBm6hOd4yJK7SbcvyE1UDdIVG5YCXY6Nviq2SBuiKrOZ+1DotPfwNugZRl8XDDPzgXC0sC3ne8qzCGu1a3pQP6RTn879bJyjeZnkemAHCjMVYtAFXF7o2W6H16dFqyICRQeoWlAn53ktR5C/wI+W6cH/CtbdvaDRL6vfSXVuuHU4QloWSRvs9wjuu74cAzB9+ZOOwbLANOBaLl4/YvGQlM1d7HYf0bbuMuyPmdKI8gvJD1eKIF+x6nMc0mNcWluJGLW4QO5DJH613NB71JULsjbsDhuSQOn5BYeVyj7ySyHnmbnTrKRVJRbf1PgJq9vNPvEoS7xgw6jeSbr6m+cMFcUpaTvFILGCD6+Y1iSTC8Mi/Kg/FjRjHB9KsW5K5tdpw57hytTvmi1kyE6+UruwhuoBRdd5/avXa0eJyb0M1Z6KukFPDN6qNh830OogO/C/Ut+Y63VF9jhe55AjRC1moVVcZj8yCh9SYrsnJRAViPObvmWnMe/6w7mZIA+28g8faedww== jenkins@appvm"   # <-- replace with content of /var/lib/jenkins/.ssh/app_vm_key.pub
+
+mkdir -p /home/vagrant/.ssh
+echo "$PUB_KEY" >> /home/vagrant/.ssh/authorized_keys
+
+
 # ------------------------- Install Required Packages ------------------------- #
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 sudo apt-get update -y
@@ -15,8 +23,8 @@ sudo rm -f /etc/nginx/sites-enabled/default
 
 
 # Create frontend directory for staging/prod
-mkdir -p /var/www/my-app-staging
-mkdir -p /var/www/my-app-prod
+sudo mkdir -p /var/www/my-app-staging
+sudo mkdir -p /var/www/my-app-prod
 
 # Frontend files — owned by Nginx so it can read/serve without permission issues
 sudo chown -R www-data:www-data /var/www/my-app-staging

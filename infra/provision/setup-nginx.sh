@@ -4,7 +4,7 @@ set -e
 
 # ------------------------- Setup SSH key for Jenkins ------------------------- #
 # Ensure Jenkins' public key is added so pipeline can SSH without password
-PUB_KEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHD1QbJidykLDMx3rbxs3thJ/cauoP2DBc1Qh8VqH7oipGtgSdYWou00+3gpXxdyAbYWxcTw3iRw5+y40Xwp1tZxXAyxa6/HxRSLRTTA2+j3JXhJTOY2mFEIJ16GgIPcsIjMsZMb9MCWg3GjXw+bQE27kAGHjQ78u6HUywKVBm6hOd4yJK7SbcvyE1UDdIVG5YCXY6Nviq2SBuiKrOZ+1DotPfwNugZRl8XDDPzgXC0sC3ne8qzCGu1a3pQP6RTn879bJyjeZnkemAHCjMVYtAFXF7o2W6H16dFqyICRQeoWlAn53ktR5C/wI+W6cH/CtbdvaDRL6vfSXVuuHU4QloWSRvs9wjuu74cAzB9+ZOOwbLANOBaLl4/YvGQlM1d7HYf0bbuMuyPmdKI8gvJD1eKIF+x6nMc0mNcWluJGLW4QO5DJH613NB71JULsjbsDhuSQOn5BYeVyj7ySyHnmbnTrKRVJRbf1PgJq9vNPvEoS7xgw6jeSbr6m+cMFcUpaTvFILGCD6+Y1iSTC8Mi/Kg/FjRjHB9KsW5K5tdpw57hytTvmi1kyE6+UruwhuoBRdd5/avXa0eJyb0M1Z6KukFPDN6qNh830OogO/C/Ut+Y63VF9jhe55AjRC1moVVcZj8yCh9SYrsnJRAViPObvmWnMe/6w7mZIA+28g8faedww== jenkins@appvm"   # <-- replace with content of /var/lib/jenkins/.ssh/app_vm_key.pub
+PUB_KEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCNEtQpcPw0S6CNlluWRWkXlGvtk4NmE5RDbtsyYYd1LrylvJeWkZKC52zpYH418vKlFYWOOWgB0gKHkUbFMYF/1gk55epDz7sgGkdTiqr4TIYT6hOtsYod7dMUhnQvXcIKdAUyk4mhbib8gFNzhdEF00wAnLR5pmeQn+C3FFUophedkVdkcz/QYnEbfluz+v28vBJfJlTC0mnBWJXMuuwimtu/53njQqRdsmT15kwPVgytxkwQAD02UuqKz90M+KeEYQYlhIwE+yCR1Ix7NwsqOspZXXoNKZUW2L8Zt/cfwT/+vsrO0+2Q7XQjc2Oj0S5fCGPQELF0RaHAixi0zMiaMyKOCBQpyoiq8Rj2lXumViQSa5eKysNQjQ1yvsMXuuFmms7ULZnuTDzM0yYgu4SzcBd0LCPDRt3PtiD5YNn0wXxGy1DyH12JNooa/efxR2IuSfvHe8u9VAli6O63TBpwzPIbAMZbv2apdHTmCjjUZ8fCc2YiSuygrVeZNr6k/E5AmUMaAzFxgw+Xfp6k/F/qNV3xDFOkEpqxuJiP0wkyAS5eHKDPfA574GMVIZops6L3p7jcJAan0pj39NQ1lf7agGVLJa0CwMoxfTa923FyF+O4YtELemA51uzShjbw+CBvnd5+PHLv0EpZRlq5Bgq1gGiIguIbf9FCFSF0RUq0Cw== jenkins@appvm"   # <-- replace with content of /var/lib/jenkins/.ssh/app_vm_key.pub
 
 mkdir -p /home/vagrant/.ssh
 echo "$PUB_KEY" >> /home/vagrant/.ssh/authorized_keys
@@ -44,7 +44,7 @@ echo "<h1>Waiting for Production App</h1>" | sudo tee /var/www/my-app-prod/index
 cat << EOF | sudo tee /etc/nginx/sites-available/my-app-staging
 server {
     listen 81;
-    server_name 192.168.57.11;
+    server_name 192.168.56.11;
 
     root /var/www/my-app-staging;
     index index.html;
@@ -64,7 +64,7 @@ EOF
 cat << EOF | sudo tee /etc/nginx/sites-available/my-app-prod
 server {
     listen 80;
-    server_name 192.168.57.11;
+    server_name 192.168.56.11;
 
     root /var/www/my-app-prod;
     index index.html;

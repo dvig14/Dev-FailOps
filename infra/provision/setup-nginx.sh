@@ -4,7 +4,7 @@ set -e
 
 # ------------------------- Setup SSH key for Jenkins ------------------------- #
 # Ensure Jenkins' public key is added so pipeline can SSH without password
-PUB_KEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCNEtQpcPw0S6CNlluWRWkXlGvtk4NmE5RDbtsyYYd1LrylvJeWkZKC52zpYH418vKlFYWOOWgB0gKHkUbFMYF/1gk55epDz7sgGkdTiqr4TIYT6hOtsYod7dMUhnQvXcIKdAUyk4mhbib8gFNzhdEF00wAnLR5pmeQn+C3FFUophedkVdkcz/QYnEbfluz+v28vBJfJlTC0mnBWJXMuuwimtu/53njQqRdsmT15kwPVgytxkwQAD02UuqKz90M+KeEYQYlhIwE+yCR1Ix7NwsqOspZXXoNKZUW2L8Zt/cfwT/+vsrO0+2Q7XQjc2Oj0S5fCGPQELF0RaHAixi0zMiaMyKOCBQpyoiq8Rj2lXumViQSa5eKysNQjQ1yvsMXuuFmms7ULZnuTDzM0yYgu4SzcBd0LCPDRt3PtiD5YNn0wXxGy1DyH12JNooa/efxR2IuSfvHe8u9VAli6O63TBpwzPIbAMZbv2apdHTmCjjUZ8fCc2YiSuygrVeZNr6k/E5AmUMaAzFxgw+Xfp6k/F/qNV3xDFOkEpqxuJiP0wkyAS5eHKDPfA574GMVIZops6L3p7jcJAan0pj39NQ1lf7agGVLJa0CwMoxfTa923FyF+O4YtELemA51uzShjbw+CBvnd5+PHLv0EpZRlq5Bgq1gGiIguIbf9FCFSF0RUq0Cw== jenkins@appvm"   # <-- replace with content of /var/lib/jenkins/.ssh/app_vm_key.pub
+PUB_KEY="ssh-rsa AAAAB3NzaC1yc2E...."   # <-- replace with content of /var/lib/jenkins/.ssh/app_vm_key.pub
 
 mkdir -p /home/vagrant/.ssh
 echo "$PUB_KEY" >> /home/vagrant/.ssh/authorized_keys
@@ -53,8 +53,8 @@ server {
         try_files \$uri /index.html;
     }
 
-    location /api/ {
-        proxy_pass http://127.0.0.1:3001/;
+    location /api {
+        proxy_pass http://127.0.0.1:3001;
     }
 }
 EOF
@@ -73,8 +73,8 @@ server {
         try_files \$uri /index.html;
     }
 
-    location /api/ {
-        proxy_pass http://127.0.0.1:3002/;
+    location /api {
+        proxy_pass http://127.0.0.1:3002;
     }
 }
 EOF

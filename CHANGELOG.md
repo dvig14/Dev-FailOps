@@ -4,6 +4,21 @@
 
 <br>
 
+## 🟢 v1.0.0 – CI/CD Setup Added (Released: 19 Sep 2025)
+
+### ✅ Included:
+
+* Initial CI/CD pipeline for deploying the **`my-app-demo`** project.
+* **Jenkins VM** provisioned for running pipelines.
+* **MinIO VM** configured for artifact storage and Terraform state management.
+* **Terraform** integrated for provisioning and managing the App VM.
+* **Environment strategy**:
+
+  * `develop` → staging
+  * `master`  → production
+
+<br>
+
 ## 🟢 v0.2.0 – New Failure Added: State Lock Conflict (Released: 4 Aug 2025)
 
 ### ✅ Included:

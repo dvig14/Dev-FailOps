@@ -4,7 +4,7 @@ This is a hands-on lab where DevOps learners can **simulate real-world failures*
 
 - 🧱 Terraform
 - 🐳 Docker *(coming soon)*
-- ⚙️ CI/CD pipelines *(coming soon)*
+- ⚙️ CI/CD pipelines
 
 Each scenario lives in its own folder under `failops-scenarios/` and includes:
 - 📄 What breaks

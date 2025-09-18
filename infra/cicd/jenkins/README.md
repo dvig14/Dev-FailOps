@@ -204,7 +204,7 @@ exit
 **Plugin Installation:** SSh Agent Plugin
 * This plugin allows you to provide SSH credentials to builds via a ssh-agent in Jenkins.
 
-📘 [Provision Infra](./infra-staging#infrastructure-provisioning.md)
+📘 [Provision Infra](./infra-staging.md#infrastructure-provisioning)
 
 <br>
 
@@ -216,7 +216,7 @@ exit
   * And someone hit `https://my-app/api/` then that req goes to backend ip which is hidden 
 * Both frontend and backend sharing the same **private IP** (i.e. `192.168.56.11`)
 
-📘 [Deploy Staging](./infra-staging#deploy---staging.md)
+📘 [Deploy Staging](./infra-staging.md#deploy---staging)
 
 <br>
 

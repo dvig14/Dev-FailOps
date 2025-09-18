@@ -1,0 +1,13 @@
+Vagrant.configure("2") do |config|
+  config.vm.define "jenkins-server" do |jenkins|
+    jenkins.vm.box = "ubuntu/jammy64" 
+    jenkins.vm.hostname = "jenkins-server" 
+    jenkins.vm.network "private_network", ip: "192.168.56.13"  
+    jenkins.vm.provider "virtualbox" do |vb|
+      vb.memory = 2048
+      vb.cpus = 1 
+      vb.gui = false
+    end
+    jenkins.vm.provision "shell" , path: "install-jenkins.sh"
+  end 
+end

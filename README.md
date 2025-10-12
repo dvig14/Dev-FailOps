@@ -3,7 +3,7 @@
 This is a hands-on lab where DevOps learners can **simulate real-world failures** — and learn how to fix them.
 
 - 🧱 Terraform
-- 🐳 Docker *(coming soon)*
+- 🐳 Docker 
 - ⚙️ CI/CD pipelines
 
 Each scenario lives in its own folder under `failops-scenarios/` and includes:
@@ -40,7 +40,9 @@ OR try it hands-on with setup below 👇
 Each tool (Terraform, Docker, CI/CD) has its own setup guide.  
 Start with Terraform:
 
-📘 [Terraform Setup & Simulations →](./failops-scenarios/terraform/README.md)
+- 📘 [Terraform Setup & Simulations →](./failops-scenarios/terraform/README.md)
+- 📘 [CICD Setup & Infra →](./infra/cicd/jenkins/README.md)
+- 📘 [Docker Docs & Projects →](./infra/docker/)
 
 <br>
 
@@ -53,8 +55,8 @@ Dev-FailOps/
 │
 ├── failops-scenarios/       # 🔥 Simulation folders for each tool
 │   ├── terraform/           # Real-world Terraform failures
-│   ├── docker/              # (coming soon)
-│   ├── cicd/                # (coming soon)
+│   ├── docker/              # Docker docs & Implementation
+│   ├── cicd/                # CICD Setup docs & jenkins-server
 │
 ├── infra/                   # Supporting infrastructure (per tool)
 │   ├── terraform/           # Terraform base config for scenarios
